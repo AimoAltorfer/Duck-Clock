@@ -1,7 +1,26 @@
 function updateClock() {
-    const hoursDiv = document.getElementById('hours');
-    const minutesDiv = document.getElementById('minutes');
-    const secondsDiv = document.getElementById('seconds');
+    const clockDiv = document.getElementById('clock');
+    let hoursDiv = document.getElementById('hours');
+    let minutesDiv = document.getElementById('minutes');
+    let secondsDiv = document.getElementById('seconds');
+
+    if (!hoursDiv) {
+        hoursDiv = document.createElement('div');
+        hoursDiv.id = 'hours';
+        clockDiv.appendChild(hoursDiv);
+    }
+
+    if (!minutesDiv) {
+        minutesDiv = document.createElement('div');
+        minutesDiv.id = 'minutes';
+        clockDiv.appendChild(minutesDiv);
+    }
+
+    if (!secondsDiv) {
+        secondsDiv = document.createElement('div');
+        secondsDiv.id = 'seconds';
+        clockDiv.appendChild(secondsDiv);
+    }
 
     const now = new Date();
     const hours = now.getHours().toString().padStart(2, '0');
