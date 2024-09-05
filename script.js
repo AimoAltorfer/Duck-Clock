@@ -8,17 +8,21 @@ function updateClock() {
     const minutes = now.getMinutes().toString().padStart(2, '0');
     const seconds = now.getSeconds().toString().padStart(2, '0');
 
-    hoursDiv.innerHTML = getImagesForDigits(hours);
-    minutesDiv.innerHTML = getImagesForDigits(minutes);
-    secondsDiv.innerHTML = getImagesForDigits(seconds);
+    const version = document.getElementById('version-select').value;
+
+    hoursDiv.innerHTML = getImagesForDigits(hours, version);
+    minutesDiv.innerHTML = getImagesForDigits(minutes, version);
+    secondsDiv.innerHTML = getImagesForDigits(seconds, version);
 }
 
-function getImagesForDigits(timeStr) {
+function getImagesForDigits(timeStr, version) {
     return timeStr
         .split('')
-        .map(digit => `<img src="images/${digit}.png" alt="${digit}">`)
+        .map(digit => `<img src="images/${version}/${digit}.png" alt="${digit}">`)
         .join('');
 }
+
+document.getElementById('version-select').addEventListener('change', updateClock);
 
 setInterval(updateClock, 1000);
 updateClock();
