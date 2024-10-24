@@ -41,7 +41,21 @@ function getImagesForDigits(timeStr, version) {
         .join('');
 }
 
-document.getElementById('version-select').addEventListener('change', updateClock);
+function preloadImages(version) {
+    const digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    digits.forEach(digit => {
+        const img = new Image();
+        img.src = `images/${version}/${digit}.png`;
+    });
+}
 
+document.getElementById('version-select').addEventListener('change', () => {
+    const version = document.getElementById('version-select').value;
+    preloadImages(version);
+    updateClock();
+});
+
+const initialVersion = document.getElementById('version-select').value;
+preloadImages(initialVersion);
 setInterval(updateClock, 1000);
 updateClock();
